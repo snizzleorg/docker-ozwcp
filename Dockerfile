@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM resin/rpi-raspbian
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update
@@ -15,13 +15,13 @@ RUN apt-get install --no-install-recommends -y libudev-dev
 
 RUN cd open-zwave-read-only && make && make install
 
-RUN apt-get install --no-install-recommends -y libgnutls-dev
+RUN apt-get install --no-install-recommends -y libgnutls28-dev
 
 COPY Makefile /open-zwave-control-panel/Makefile
 
 RUN cd open-zwave-control-panel && make
 
-COPY options.xml /usr/local/etc/openzwave/options.xml
+#COPY options.xml /usr/local/etc/openzwave/options.xml
 
 WORKDIR /open-zwave-control-panel
 
